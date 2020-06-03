@@ -19,7 +19,7 @@ pipeline {
         }
         stage('Docker push') {
             steps {
-                bat "docker (Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 235190073377.dkr.ecr.us-east-1.amazonaws.com
+                bat "(Get-ECRLoginCommand).Password | docker login --username AWS --password-stdin 235190073377.dkr.ecr.us-east-1.amazonaws.com
                 bat "docker tag demo:latest 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
                 bat "docker push 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
           }
