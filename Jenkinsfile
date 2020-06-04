@@ -1,36 +1,43 @@
-pipeline {
+pipeline
+{
     agent any
-     stages {
-        stage('Build') {
-            steps {
-                bat "mvn clean"
-        
+    stages
+    {
+        stage('Checkout'){
+            steps
+            {
+                script
+                {
+                    git 'https://github.com/satinderthakur/April2020.git'
+                }
             }
         }
-        stage('Test') {
-            steps {
-                bat "mvn test"
+        stage('Docker Build'){
+            steps{
+                script{
+                    docker.build('demo')
+                }
             }
         }
-        stage('Build Docker') {
-            steps {
-                bat "docker build -t demo ."
-		bat "docker tag demo 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"    
-             }
+        stage('Docker Push'){
+            steps{
+                script{
+                    docker.withRegistry('https://235190073377.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:Demo'){
+                        docker.image('demo').push('latest')
+                    }
+                }
+            }
         }
-        stage('Docker push') {
-            steps {
-                  bat docker.withRegistry('https://235190073377.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:Demo') {
-                  bat "docker push 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
-	     }
-          }
-        }
-         stage('Terraform Apply'){
+        stage('Terraform Apply'){
 			steps{
-			    bat "terraform init" {
-		            bat "terraform apply -auto-approve"	
-	    }
-	  }			
-        }
-       }
+				script{
+					bat'''
+					
+						terraform init
+						terraform apply -auto-approve
+					'''
+				}
+			}
+		}
     }
+} 
