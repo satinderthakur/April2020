@@ -14,17 +14,17 @@ pipeline {
         }
         stage('Build Docker') {
             steps {
-                bat "docker build --build-arg APP_NAME=demo -t 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest ."
+                bat "docker build -t demo 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest ."
              }
         }
         stage('Docker push') {
             steps {
-                bat "docker.withRegistry('https://235190073377.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:Demo')" {
+                bat docker.withRegistry('https://235190073377.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:Demo') {
                 bat "docker push 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
-		}
+	     }
           }
         }
-       stage('Terraform Apply'){
+        stage('Terraform Apply'){
 			steps{
 				bat "terraform init" {
 		                bat "terraform apply -auto-approve"	
