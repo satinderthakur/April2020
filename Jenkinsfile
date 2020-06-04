@@ -25,14 +25,11 @@ pipeline {
           }
           stage('Terraform Apply'){
 			steps{
-				script{
-					bat'''
-					
-						terraform init
-						terraform apply -auto-approve
-					'''
-				}
-			}  
+		
+			    bat "terraform init"
+		            bat "terraform apply -auto-approve"		
+		}
+	   }  
         }
     }
 }
