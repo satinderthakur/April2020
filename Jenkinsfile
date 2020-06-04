@@ -23,6 +23,16 @@ pipeline {
                 bat "docker push 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
             }
           }
+          stage('Terraform Apply'){
+			steps{
+				script{
+					bat'''
+					
+						terraform init
+						terraform apply -auto-approve
+					'''
+				}
+			}  
         }
     }
 }
