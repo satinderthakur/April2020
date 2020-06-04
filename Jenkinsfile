@@ -14,13 +14,13 @@ pipeline {
         }
         stage('Build Docker') {
             steps {
-                bat "docker build --build-arg APP_NAME=receipts -t 235190073377.dkr.ecr.us-east-1.amazonaws.com/bttrm-receipt-consumer:latest -f docker/prod/Dockerfile ."
+                bat "docker build --build-arg APP_NAME=demo -t 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest -f docker/prod/Dockerfile ."
              }
         }
         stage('Docker push') {
             steps {
                 bat docker.withRegistry('https://235190073377.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:Demo') {
-                bat "docker push 235190073377.dkr.ecr.us-east-1.amazonaws.com/bttrm-receipt-consumer:latest"
+                bat "docker push 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
             }
           }
         }
