@@ -20,12 +20,12 @@ pipeline {
         }
         stage('Docker push') {
             steps {
-                docker.withRegistry('https://235190073377.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:Demo') {
-                bat "docker push 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
+                  bat docker.withRegistry('https://235190073377.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:Demo') {
+                  bat "docker push 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"
 	     }
           }
         }
-        stage('Terraform Apply'){
+         stage('Terraform Apply'){
 			steps{
 				bat "terraform init" {
 		                bat "terraform apply -auto-approve"	
