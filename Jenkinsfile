@@ -15,7 +15,7 @@ pipeline {
         stage('Build Docker') {
             steps {
                 bat "docker build -t demo ."
-		bat "docker tag demp 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"    
+		bat "docker tag demo 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest"    
              }
         }
         stage('Docker push') {
