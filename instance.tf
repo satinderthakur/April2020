@@ -13,9 +13,15 @@ tags = {
              #!/bin/bash
              yum update -y
              yum install httpd -y
-             echo "Terraform with AWS Training!" > /var/www/html/index.html
              service httpd start
              service httpd on
+             sudo yum update -y
+             amazon-linux-extras install docker -y
+             service docker start
+             usermod -a -G docker ec2-user
+             service docker enable",
+             $(aws ecr get-login --no-include-email --region us-east-1)",
+             docker pull 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest
              EOF
 
  provisioner "file" {
