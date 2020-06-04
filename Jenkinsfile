@@ -14,7 +14,7 @@ pipeline {
         }
         stage('Build Docker') {
             steps {
-                bat "docker build --build-arg APP_NAME=demo -t 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest -f docker/prod/Dockerfile ."
+                bat "docker build --build-arg APP_NAME=demo -t 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest ."
              }
         }
         stage('Docker push') {
