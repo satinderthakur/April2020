@@ -24,14 +24,4 @@ tags = {
              docker pull 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest
              EOF
 
- provisioner "file" {
-   source = "script.sh"
-   destination = "/tmp/script.sh"
- }
- provisioner "remote-exec" {
-   inline = [
-     "chmod +x /tmp/script.sh",
-     "sudo /tmp/script.sh"
-   ]
-  }
 }  
