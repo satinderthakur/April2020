@@ -22,7 +22,7 @@ tags = {
              service docker enable",
              $(aws ecr get-login --no-include-email --region us-east-1)",
              docker pull 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest
-             docker container run -itd -p 8080:8080 506844237526.dkr.ecr.ap-south-1.amazonaws.com/demo:latest
+             docker container run -itd -p 8080:8080 235190073377.dkr.ecr.us-east-1.amazonaws.com/demo:latest
              EOF
 
 }  
